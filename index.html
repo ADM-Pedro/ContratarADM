@@ -33,21 +33,27 @@ input,select,button,textarea{font-family:inherit}
 .head p{color:var(--muted);font-size:14.5px}
 .badge-int{display:inline-block;margin-top:12px;font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--purple-soft);background:rgba(155,60,255,.1);border:1px solid rgba(155,60,255,.3);padding:5px 14px;border-radius:99px}
 .card{background:linear-gradient(180deg,var(--panel),var(--bg-2));border:1px solid var(--line);border-radius:var(--r);padding:24px;margin-bottom:18px}
-.field{margin-bottom:16px}
-.field label{display:block;font-size:13.5px;color:var(--text);margin-bottom:7px;font-weight:500}
-.field .hint{font-size:12px;color:var(--muted-2);font-weight:400}
+.step{font-family:"Oswald",sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted-2);margin-bottom:18px;text-align:center}
+.field{margin-bottom:18px}
+.field>label{display:block;font-size:14px;color:var(--text);margin-bottom:8px;font-weight:600}
+.field .hint{font-size:12px;color:var(--muted-2);font-weight:400;display:block;margin-top:-2px;margin-bottom:7px}
 .field input,.field select,.field textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 14px;color:var(--text);font-size:16px}
-.field textarea{min-height:84px;resize:vertical}
+.field textarea{min-height:90px;resize:vertical}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(155,60,255,.2)}
 .req{color:var(--purple-soft)}
 .seg{display:flex;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:4px;gap:4px}
 .seg button{flex:1;background:none;border:none;color:var(--muted);font-family:"Oswald",sans-serif;font-weight:600;letter-spacing:.5px;padding:11px;border-radius:7px;font-size:14px;transition:.2s;cursor:pointer}
 .seg button.on{background:linear-gradient(135deg,var(--purple),#6a18c9);color:#fff}
+/* chips multi */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{background:var(--bg);border:1px solid var(--line);color:var(--muted);font-size:14px;padding:10px 16px;border-radius:99px;cursor:pointer;transition:.2s}
+.chips button.on{background:rgba(155,60,255,.18);border-color:var(--purple);color:#fff}
+.subcard{background:rgba(155,60,255,.06);border:1px solid rgba(155,60,255,.25);border-radius:var(--r-sm);padding:16px;margin-bottom:18px}
+.subcard .field:last-child{margin-bottom:0}
 .btn-send{width:100%;border:none;border-radius:99px;padding:16px;font-family:"Oswald",sans-serif;font-weight:700;letter-spacing:.5px;font-size:17px;cursor:pointer;background:linear-gradient(135deg,var(--green),#1faa57);color:#04130a;box-shadow:0 12px 30px -12px rgba(54,224,122,.6);transition:.2s}
 .btn-send:hover{transform:translateY(-2px)}
 .err{color:var(--red);font-size:13px;margin-top:10px;text-align:center;min-height:16px}
 .foot{text-align:center;color:var(--muted-2);font-size:12.5px;padding:18px 16px 0}
-/* sucesso */
 .done{display:none}
 .done.on{display:block}
 .codebox{background:var(--bg);border:1px dashed var(--line-2);border-radius:var(--r-sm);padding:14px;font-family:monospace;font-size:12px;color:var(--muted);word-break:break-all;max-height:120px;overflow:auto;margin:12px 0}
@@ -62,20 +68,23 @@ input,select,button,textarea{font-family:inherit}
 <div class="head">
   <img src="logo.png" alt="DK Diário Brawl" onerror="this.style.display='none'" />
   <h1>Quero ser ADM 🎯</h1>
-  <p>Preenche rapidinho. Leva menos de 2 minutos.</p>
+  <p>O ADM roda os diários, recebe a inscrição e paga os prêmios. Preenche com sinceridade — leva uns 2 minutos.</p>
   <div class="badge-int">DK Diário Brawl · Vaga de ADM</div>
 </div>
 
 <div class="wrap">
-  <!-- FORMULÁRIO -->
   <form class="card" id="form" autocomplete="off">
+    <div class="step">Seus dados</div>
+
     <div class="field">
-      <label>Como te chamam? <span class="req">*</span> <span class="hint">(seu nome ou nick)</span></label>
+      <label>Como te chamam? <span class="req">*</span></label>
+      <span class="hint">Seu nome ou nick no jogo.</span>
       <input type="text" id="f_nome" maxlength="40" placeholder="Ex: João / KingDK" />
     </div>
 
     <div class="field">
-      <label>Seu WhatsApp <span class="req">*</span> <span class="hint">(com DDD)</span></label>
+      <label>Seu WhatsApp <span class="req">*</span></label>
+      <span class="hint">Com DDD. É por aqui que a gente fala com você.</span>
       <input type="tel" id="f_wpp" maxlength="18" placeholder="Ex: 11 99999-9999" />
     </div>
 
@@ -84,22 +93,78 @@ input,select,button,textarea{font-family:inherit}
       <input type="number" id="f_idade" min="10" max="80" placeholder="Ex: 16" />
     </div>
 
+    <div class="step" style="margin-top:26px">Experiência</div>
+
     <div class="field">
-      <label>Já foi ADM / moderador de algum grupo antes? <span class="req">*</span></label>
+      <label>Você já foi ADM, moderador ou organizou grupo/torneio antes? <span class="req">*</span></label>
       <div class="seg" id="segExp">
         <button type="button" data-exp="1">Sim, já fui</button>
         <button type="button" data-exp="0" class="on">Nunca fui</button>
       </div>
     </div>
 
-    <div class="field" id="expBox" style="display:none">
-      <label>Onde foi e por quanto tempo? <span class="hint">(conta rápido)</span></label>
-      <input type="text" id="f_expdesc" maxlength="100" placeholder="Ex: ADM de um grupo de Free Fire por 6 meses" />
+    <!-- só aparece se JÁ FOI -->
+    <div class="subcard" id="expBox" style="display:none">
+      <div class="field">
+        <label>Há quanto tempo você tem/teve essa experiência?</label>
+        <select id="f_exptempo">
+          <option value="">Selecione...</option>
+          <option value="Menos de 3 meses">Menos de 3 meses</option>
+          <option value="3 a 12 meses">De 3 a 12 meses</option>
+          <option value="Mais de 1 ano">Mais de 1 ano</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Onde foi e o que você fazia?</label>
+        <span class="hint">Conta rápido: que grupo/jogo, e o que você administrava (regras, pagamentos, banir, etc.).</span>
+        <input type="text" id="f_expdesc" maxlength="140" placeholder="Ex: ADM de grupo de Free Fire, eu cuidava dos pagamentos e das regras" />
+      </div>
+      <div class="field">
+        <label>Você mexia com dinheiro lá? <span class="hint" style="display:inline">(recebia inscrição / pagava prêmio)</span></label>
+        <div class="seg" id="segExpDin">
+          <button type="button" data-ed="1">Sim, mexia</button>
+          <button type="button" data-ed="0" class="on">Não mexia</button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Tem alguma prova? <span class="hint" style="display:inline">(opcional)</span></label>
+        <span class="hint">Print, link do grupo, seu perfil... só se tiver. Não é obrigatório.</span>
+        <input type="url" id="f_prova" maxlength="200" placeholder="Cole um link (Drive, Imgur, print...)" />
+      </div>
+    </div>
+
+    <div class="step" style="margin-top:26px">Disponibilidade</div>
+
+    <div class="field">
+      <label>Quantas horas por dia você consegue ficar online pra rodar partidas? <span class="req">*</span></label>
+      <input type="number" id="f_horas" min="0" max="24" placeholder="Ex: 4" />
     </div>
 
     <div class="field">
-      <label>Quantas horas por dia você fica online? <span class="req">*</span></label>
-      <input type="number" id="f_horas" min="0" max="24" placeholder="Ex: 5" />
+      <label>Em quais horários você costuma estar livre? <span class="req">*</span></label>
+      <span class="hint">Pode marcar mais de um.</span>
+      <div class="chips" id="chipsHorario">
+        <button type="button" data-h="Manhã">🌅 Manhã</button>
+        <button type="button" data-h="Tarde">☀️ Tarde</button>
+        <button type="button" data-h="Noite">🌙 Noite</button>
+        <button type="button" data-h="Madrugada">🌌 Madrugada</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Quantos dias por semana você conseguiria rodar diários? <span class="req">*</span></label>
+      <input type="number" id="f_dias" min="1" max="7" placeholder="De 1 a 7" />
+    </div>
+
+    <div class="step" style="margin-top:26px">Confiança & Jogo</div>
+
+    <div class="field">
+      <label>Você tem Pix e se sente confortável recebendo e pagando os jogadores? <span class="req">*</span></label>
+      <span class="hint">O ADM mexe com o dinheiro das salas (inscrição e prêmios).</span>
+      <div class="seg" id="segPix">
+        <button type="button" data-pix="1">Sim, tranquilo</button>
+        <button type="button" data-pix="0" class="on">Não / não tenho</button>
+      </div>
     </div>
 
     <div class="field">
@@ -107,21 +172,16 @@ input,select,button,textarea{font-family:inherit}
       <input type="text" id="f_brawl" maxlength="60" placeholder="Ex: Sim, 25 mil troféus" />
     </div>
 
-    <div class="field">
-      <label>Link de prova <span class="hint">(print da experiência, seu perfil, etc.)</span></label>
-      <input type="url" id="f_prova" maxlength="200" placeholder="Cole um link (Drive, Imgur, print...)" />
-    </div>
-
-    <div class="field" style="margin-bottom:20px">
+    <div class="field" style="margin-bottom:22px">
       <label>Por que a gente deveria te escolher? <span class="req">*</span></label>
-      <textarea id="f_motivo" maxlength="300" placeholder="Fala um pouco de você e por que seria um bom ADM..."></textarea>
+      <span class="hint">Fala de você, sua responsabilidade e por que seria um bom ADM.</span>
+      <textarea id="f_motivo" maxlength="350" placeholder="Escreva aqui..."></textarea>
     </div>
 
     <button type="submit" class="btn-send">Enviar candidatura ➜</button>
     <div class="err" id="err"></div>
   </form>
 
-  <!-- SUCESSO -->
   <div class="card done" id="done">
     <h2 style="font-size:22px;margin-bottom:8px">✅ Quase lá!</h2>
     <p style="color:var(--muted);font-size:14px;margin-bottom:4px">Pra concluir, <b>envie sua candidatura no WhatsApp do responsável</b> tocando no botão abaixo. Sua resposta só conta depois disso.</p>
@@ -137,47 +197,79 @@ input,select,button,textarea{font-family:inherit}
 /* ====== CONFIG ====== */
 var WHATSAPP_ADM = "5511998385244"; // número que recebe as candidaturas
 
-var exp = 0;
+var exp = 0, pix = 0, expDin = 0, horarios = [];
 function $(id){ return document.getElementById(id); }
 
-/* toggle experiência */
+/* toggle experiência (mostra/esconde o bloco de prova) */
 $("segExp").addEventListener("click", function(e){
   var b = e.target.closest("button"); if(!b) return;
   this.querySelectorAll("button").forEach(function(x){ x.classList.remove("on"); });
   b.classList.add("on");
   exp = b.dataset.exp === "1";
   $("expBox").style.display = exp ? "" : "none";
+  if(!exp){ $("f_expdesc").value = ""; $("f_prova").value = ""; $("f_exptempo").value = ""; } // limpa se voltou pra "nunca fui"
+});
+
+/* toggle "mexia com dinheiro" na experiência */
+$("segExpDin").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  this.querySelectorAll("button").forEach(function(x){ x.classList.remove("on"); });
+  b.classList.add("on");
+  expDin = b.dataset.ed === "1";
+});
+
+/* toggle pix */
+$("segPix").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  this.querySelectorAll("button").forEach(function(x){ x.classList.remove("on"); });
+  b.classList.add("on");
+  pix = b.dataset.pix === "1";
+});
+
+/* chips horário (multi) */
+$("chipsHorario").addEventListener("click", function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  b.classList.toggle("on");
+  var h = b.dataset.h;
+  if(b.classList.contains("on")){ if(horarios.indexOf(h) < 0) horarios.push(h); }
+  else { horarios = horarios.filter(function(x){ return x !== h; }); }
 });
 
 /* base64 seguro p/ acentos */
 function encodeData(obj){
-  var json = JSON.stringify(obj);
-  return btoa(unescape(encodeURIComponent(json)));
+  return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
 }
 
-/* ====== PONTUAÇÃO AUTOMÁTICA (0–100) ====== */
+/* ====== PONTUAÇÃO AUTOMÁTICA (0–100) ======
+   Experiência é o critério de MAIOR peso (até 45 pontos). */
 function calcScore(d){
-  var s = 0, det = [];
-  // experiência (30)
-  if(d.exp){ s += 25; det.push("Tem experiência (+25)");
-    if(d.expdesc && d.expdesc.length > 8){ s += 5; det.push("Descreveu a experiência (+5)"); }
-  } else { det.push("Sem experiência (+0)"); }
-  // horas online (20)
-  var h = Math.min(d.horas, 12);
-  var ph = Math.round((h/12)*20);
-  s += ph; det.push(d.horas + "h online por dia (+" + ph + ")");
-  // prova (20)
-  if(d.prova && d.prova.indexOf(".") > -1){ s += 20; det.push("Enviou prova/link (+20)"); }
-  else { det.push("Não enviou prova (+0)"); }
-  // motivação (15)
-  var m = (d.motivo||"").trim().length;
-  var pm = m >= 120 ? 15 : m >= 60 ? 10 : m >= 20 ? 5 : 0;
-  s += pm; det.push("Texto de motivação (+" + pm + ")");
-  // joga brawl (15)
+  var s = 0;
+  // EXPERIÊNCIA (até 45) — o que mais vale
+  if(d.exp){
+    var base = d.exptempo === "Mais de 1 ano" ? 30
+             : d.exptempo === "3 a 12 meses"  ? 24
+             : d.exptempo === "Menos de 3 meses" ? 16
+             : 14; // disse que já foi mas não informou o tempo
+    s += base;
+    if(d.expdin) s += 8;                              // já mexeu com dinheiro = ouro pro cargo
+    if(d.expdesc && d.expdesc.length > 10) s += 4;    // descreveu o que fazia
+    if(d.prova && d.prova.indexOf(".") > -1) s += 3;  // tem prova
+    // (teto da experiência = 45)
+    if(s > 45) s = 45;
+  }
+  // confiança / dinheiro (18)
+  if(d.pix) s += 18;
+  // horas online (14) — máx em 10h
+  s += Math.round((Math.min(d.horas,10)/10)*14);
+  // dias por semana (10)
+  s += Math.round((Math.min(d.dias,7)/7)*10);
+  // joga brawl (8)
   var bl = (d.brawl||"").toLowerCase();
-  if(bl.indexOf("sim") > -1 || /\d/.test(bl)){ s += 15; det.push("Joga Brawl Stars (+15)"); }
-  else { det.push("Não confirmou que joga (+0)"); }
-  return { score: Math.min(s,100), det: det };
+  if(bl.indexOf("sim") > -1 || /\d/.test(bl)) s += 8;
+  // motivação (5)
+  var m = (d.motivo||"").trim().length;
+  s += m >= 140 ? 5 : m >= 70 ? 3 : m >= 25 ? 1 : 0;
+  return Math.min(s, 100);
 }
 
 /* ====== ENVIO ====== */
@@ -187,55 +279,58 @@ $("form").addEventListener("submit", function(e){
   var wpp = $("f_wpp").value.trim();
   var idade = parseInt($("f_idade").value,10) || 0;
   var horas = parseInt($("f_horas").value,10) || 0;
+  var dias = parseInt($("f_dias").value,10) || 0;
   var brawl = $("f_brawl").value.trim();
   var motivo = $("f_motivo").value.trim();
-  var prova = $("f_prova").value.trim();
+  var prova = exp ? $("f_prova").value.trim() : "";
   var expdesc = exp ? $("f_expdesc").value.trim() : "";
+  var exptempo = exp ? $("f_exptempo").value : "";
 
-  if(!nome || !wpp || !idade || !brawl || !motivo){
-    $("err").textContent = "Preenche os campos com * pra enviar.";
-    return;
+  if(!nome || !wpp || !idade || !horas || !dias || !brawl || !motivo){
+    $("err").textContent = "Preenche todos os campos com * pra enviar."; return;
   }
   if(wpp.replace(/\D/g,"").length < 10){
-    $("err").textContent = "Coloca um WhatsApp válido com DDD.";
-    return;
+    $("err").textContent = "Coloca um WhatsApp válido com DDD."; return;
+  }
+  if(horarios.length === 0){
+    $("err").textContent = "Marca pelo menos um horário que você fica livre."; return;
+  }
+  if(exp && !exptempo){
+    $("err").textContent = "Selecione há quanto tempo você tem essa experiência."; return;
   }
   $("err").textContent = "";
 
   var data = {
-    nome:nome, wpp:wpp, idade:idade, exp:!!exp, expdesc:expdesc,
-    horas:horas, brawl:brawl, prova:prova, motivo:motivo,
-    data: new Date().toLocaleDateString("pt-BR")
+    nome:nome, wpp:wpp, idade:idade,
+    exp:!!exp, exptempo:exptempo, expdin:!!expDin, expdesc:expdesc, prova:prova,
+    horas:horas, dias:dias, horarios:horarios.slice(), pix:!!pix,
+    brawl:brawl, motivo:motivo, data:new Date().toLocaleDateString("pt-BR")
   };
-  var sc = calcScore(data);
-  data.score = sc.score;
+  data.score = calcScore(data);
 
   var code = "DKADM:" + encodeData(data);
 
-  // mensagem pro WhatsApp do responsável
   var msg = "🎯 *Candidatura ADM — DK Diário Brawl*\n\n" +
     "👤 " + nome + " (" + idade + " anos)\n" +
     "📱 " + wpp + "\n" +
     "🏆 Brawl: " + brawl + "\n" +
-    "⏰ " + horas + "h/dia online\n" +
-    "💼 Experiência: " + (exp ? ("Sim — " + (expdesc||"(não detalhou)")) : "Nunca foi") + "\n" +
+    "⏰ " + horas + "h/dia · " + dias + " dia(s)/semana\n" +
+    "🕒 Livre: " + horarios.join(", ") + "\n" +
+    "💳 Pix/dinheiro: " + (pix ? "Sim, tranquilo" : "Não") + "\n" +
+    "💼 Experiência: " + (exp ? ("Sim (" + exptempo + ")" + (expDin ? " — já mexia com dinheiro" : "") + " — " + (expdesc||"(não detalhou)")) : "Nunca foi") + "\n" +
     (prova ? ("🔗 Prova: " + prova + "\n") : "") +
     "📝 " + motivo + "\n\n" +
-    "⭐ Nota automática: " + sc.score + "/100\n\n" +
+    "⭐ Nota automática: " + data.score + "/100\n\n" +
     "--- código (não apague) ---\n" + code;
 
-  var wa = "https://wa.me/" + WHATSAPP_ADM + "?text=" + encodeURIComponent(msg);
-
   $("codeOut").textContent = code;
-  $("waBtn").href = wa;
+  $("waBtn").href = "https://wa.me/" + WHATSAPP_ADM + "?text=" + encodeURIComponent(msg);
   $("form").style.display = "none";
   $("done").classList.add("on");
   window.scrollTo({top:0,behavior:"smooth"});
 
   $("copyBtn").onclick = function(){
-    navigator.clipboard.writeText(code).then(function(){
-      $("copyBtn").textContent = "Código copiado ✓";
-    });
+    navigator.clipboard.writeText(code).then(function(){ $("copyBtn").textContent = "Código copiado ✓"; });
   };
 });
 </script>
